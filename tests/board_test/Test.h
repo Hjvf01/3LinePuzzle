@@ -15,16 +15,8 @@ using std::endl;
 #include "../../src/Board.h"
 
 
-ostream& operator << (ostrem& os, const Board& board);
-
-
-ostream& operator << (ostream& os, const Board& board) {
-    for (const QList<CellType>& row: board) {
-        for (CellType cell: row) {
-            os <<
-        }
-    }
-}
+ostream& operator << (ostream& os, const Board& board);
+ostream& operator << (ostream& os, const CellType& cell);
 
 
 class BoardTest : public QObject {
