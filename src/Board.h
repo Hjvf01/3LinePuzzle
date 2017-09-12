@@ -4,7 +4,12 @@
 
 #include <QList>
 #include <QColor>
+#include <QDebug>
+#include <QTime>
 #include <QtGlobal>
+
+
+inline int randomInt(const int min, const int max);
 
 
 enum class CellType {
@@ -18,10 +23,31 @@ enum class CellType {
 class Board
 {
 public:
-    Board();
+    Board(const int width, const int height);
+    ~Board() = default;
+
+    QList<QList<CellType>> board() const { return m_board; }
 
 private:
-    QList<CellType> m_data;
+    void init();
+
+private:
+    int m_width,
+        m_height;
+
+    QList<QList<CellType>> m_board;
+
+    QList<CellType> cell = {
+        CellType::Red,
+        CellType::Green,
+        CellType::Blue
+    };
 };
+
+
+inline int randomInt(const int min, const int max) {
+    qsrand(QTime::currentTime().msec());
+    return qrand() % max + min;
+}
 
 #endif // BOARD_H

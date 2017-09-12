@@ -7,6 +7,8 @@
 #include <QAbstractListModel>
 #include <QtGlobal>
 
+#include "Board.h"
+
 
 class TableModel : public QAbstractListModel
 {
