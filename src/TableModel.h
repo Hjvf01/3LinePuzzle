@@ -4,14 +4,14 @@
 
 #include <QColor>
 #include <QList>
+#include <QVariant>
 #include <QAbstractListModel>
 #include <QtGlobal>
 
 #include "Board.h"
 
 
-class TableModel : public QAbstractListModel
-{
+class TableModel : public QAbstractListModel {
     using Colors = QList<QColor>;
 
 public:
@@ -23,24 +23,30 @@ public:
     virtual QVariant data(const QModelIndex& index, int role) const override;
     virtual QHash<int, QByteArray> roleNames() const override;
 
+    Q_INVOKABLE int _w() const {
+        qDebug() << __PRETTY_FUNCTION__;
+        return m_board.width();
+    }
+    Q_INVOKABLE int _h() const { return m_board.height(); }
+
 public:
-    enum Roles
-    {
+    enum Roles {
         ColorRole = Qt::UserRole + 1,
     };
 
 private:
-    int m_width;
-    int m_height;
+    Board m_board;
 
     QHash<int, QByteArray> roles = {
         {Roles::ColorRole, "color"},
     };
 
     Colors colors = {
-        QColor(255, 0, 0),
-        QColor(0, 255, 0),
-        QColor(0, 0, 255),
+        QColor(255,   0,   0),
+        QColor(  0, 255,   0),
+        QColor(  0,   0, 255),
+        QColor(255, 255,  51),
+        QColor(  0,   0,   0, 0)
     };
 };
 

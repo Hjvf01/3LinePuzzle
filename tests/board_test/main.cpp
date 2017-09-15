@@ -8,7 +8,7 @@ int main(int, char**) {
     using TestPtr = shared_ptr<QObject>;
 
     QList<TestPtr> tests = {
-        TestPtr(new BoardTest(5, 5)),
+        TestPtr(new BoardTest(5, 10)),
     };
 
     for (const TestPtr& test: tests) {

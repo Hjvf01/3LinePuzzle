@@ -32,10 +32,10 @@ enum class CellType {
 };
 
 
-class Board
-{
+class Board {
 public:
     Board(const int width, const int height);
+    Board(const QList<QList<CellType>>& board);
     ~Board() = default;
 
     QList<QList<CellType>> board() const { return m_board; }
@@ -45,13 +45,16 @@ public:
     int height() const { return m_height; }
     int width() const { return m_width; }
 
+    int getRow(const int i) const { return i / m_width; }
+    int getCol(const int i) const { return i % m_width; }
+
     bool canSwap(const Point& p1, const Point& p2) const;
 
 private:
     void init();
 
-    bool checkHorizontal(const Point& point) const;
-    bool checkVertical(const Point& point) const;
+    bool checkHorizontal(const Point& point, const CellType& color) const;
+    bool checkVertical(const Point& point, const CellType& color) const;
 
 private:
     int m_width,
@@ -70,7 +73,10 @@ private:
 
 inline function<int()> randomInt(const int min, const int max) {
     qsrand(QTime::currentTime().msec());
-    return [min, max]() -> int { return qrand() % max + min; };
+
+    return [min, max]() -> int {
+        return qrand() % max + min;
+    };
 }
 
 #endif // BOARD_H
